@@ -3,140 +3,28 @@
 #include <string.h>
 #include "function.h"
 #define MAX 100
-#define _CRT_SECURE_NO_WARNINGS
-
-int i = 0;
-int Voltar = 0;
-int opcao;
-int excluir;
-int ContadorTarefas = 0;
 int AcessarFuncao;
-int LocalizaId;
-StructCard Tarefas[MAX];
+int Voltar;
+struct Cards
+{
+    int id;
+    char Titulo[20];
+    char Descricao[20];
+};
 
 
-void RetornarpagAnterios() {
-    printf("Você deseja Voltar ou continuar nessa página: \n");
-    printf("Digite 1 para voltar e 0 para continuar\n");
-    scanf_s("%i", &Voltar);
-    while (getchar() != '\n'); 
-    if (Voltar == 1) {
-        Menu();
-    }
-}
+struct Bd
+{
+    struct Cards Tarefas[10];
+    int ContadorDeTarefas;
+    char TempArray[10];
+};
+
+struct Bd Banco;
 
 
-void CriarTarefa() {
-    for (i = 0; i < 4; i++) {
-        printf(" --------------------- Criar Lista de Afazeres ------------------------ \n");
-        printf("Criar o Titulo: \n"); 
-        fgets(Tarefas[ContadorTarefas].Titulo, sizeof(Tarefas[ContadorTarefas].Titulo), stdin);
-        printf("Criar a descricao: \n");
-        fgets(Tarefas[ContadorTarefas].Descricao, sizeof(Tarefas[ContadorTarefas].Descricao), stdin);
-        Tarefas[ContadorTarefas].id = ContadorTarefas + 1;
-        printf("Tarefa criada com sucesso! ID: %d\n", Tarefas[ContadorTarefas].id);
-        ContadorTarefas++;
-        RetornarpagAnterios();
-    }
-}
 
 
-void EditarTarefa() {
-    printf(" --------------------- Editando Cards ------------------------ \n");
-    printf("Digite o ID do card que você gostaria de Editar \n");
-    RetornarpagAnterios();
-}
-
-
-void Excluir() {
-    int excluir;
-    int encontrado = 0;
-    printf(" --------------------- Apagando os Cards ------------------------ \n");
-    printf("Digite o ID do card que você gostaria de apagar:\n");
-    scanf_s("%d", &excluir);
-   
-    if (excluir > ContadorTarefas) {
-        printf("Esse ID nao existe\n");
-    }
-    else {
-    
-        for (int i = excluir; i < ContadorTarefas - 1; i++) {
-            strcpy_s(Tarefas[i].Titulo, sizeof(Tarefas[i].Titulo), Tarefas[i + 1].Titulo);
-            strcpy_s(Tarefas[i].Descricao, sizeof(Tarefas[i].Descricao), Tarefas[i + 1].Descricao);
-        }
-       
-        ContadorTarefas--;
-    }
-
-    RetornarpagAnterios();
-}
-
-
-void VisualizarTodos() {
-    printf(" --------------------- Visualizar Todos os Cards ------------------------ \n");
-    system("cls");
-    if (ContadorTarefas == 0) {
-        printf("Nenhuma tarefa encontrada.\n");
-        return;
-    }
-    for (int i = 0; i < ContadorTarefas; i++) {
-        printf("ID: %d\n", Tarefas[i].id);
-        printf("Titulo: %s\n", Tarefas[i].Titulo);
-        printf("Descricao: %s\n", Tarefas[i].Descricao);
-        printf("-----------------------------------------\n");
-    }
-    RetornarpagAnterios();
-}
-
-
-void VisualizarporID() {
-    
-    printf(" --------------------- Apagando os Cards ------------------------ \n");
-    printf("Digite o ID do card que você gostaria de Visualizar:\n");
-    scanf_s("%d", &LocalizaId);
-
-        if (LocalizaId < ContadorTarefas) {
-                printf("ID: %d\n", Tarefas[LocalizaId].id);
-                printf("Titulo: %s\n", Tarefas[LocalizaId].Titulo);
-                printf("Descricao: %s\n", Tarefas[LocalizaId].Descricao);
-                printf("-----------------------------------------\n");
-            }
-            else {
-                printf("Nenhuma Card encontrado.\n");
-            }
-    
-    RetornarpagAnterios();
-
-}
-
-void VisualizarporDescricao() {
-    char VisualizarporDescricao[100];
-
-    printf(" --------------------- Visualizando os Cards ------------------------ \n");
-    printf("Digite a descricao do card que você gostaria de Visualizar:\n");
-    fgets(VisualizarporDescricao, sizeof(VisualizarporDescricao), stdin);
-
-    int encontrado = 0; 
-
-    
-    for (int i = 0; i < ContadorTarefas; i++) {
-        
-        if (strstr(Tarefas[i].Descricao, VisualizarporDescricao) != NULL) {
-           
-            printf("ID: %d\n", Tarefas[i].id);
-            printf("Titulo: %s\n", Tarefas[i].Titulo);
-            printf("Descricao: %s\n", Tarefas[i].Descricao);
-            printf("-----------------------------------------\n");
-            encontrado = 1; 
-        }
-    }
-
-    
-    if (!encontrado) {
-        printf("Nenhuma tarefa encontrada com essa descricao.\n");
-    }
-
-}
 
 void Menu() {
     system("cls");
@@ -184,4 +72,131 @@ void Menu() {
         printf("Opção inválida. Tente novamente.\n");
         break;
     }
+}
+VoltarPagAnterior() {
+
+    printf("Envie 1 pra voltar e 0 para continuar criando :\n");
+    scanf_s("%d", &Voltar);
+    if (Voltar == 1) {
+        Menu();
+    }
+}
+
+CriarTarefa() {
+    printf("Digite o titulo que voce deseja criar:\n");
+    fgets(Banco.Tarefas[Banco.ContadorDeTarefas].Titulo, sizeof(Banco.Tarefas[Banco.ContadorDeTarefas].Titulo), stdin);
+    printf("Digite a descricao que voce deseja criar:\n");
+    fgets(Banco.Tarefas[Banco.ContadorDeTarefas].Descricao, sizeof(Banco.Tarefas[Banco.ContadorDeTarefas].Descricao), stdin);
+    Banco.Tarefas[Banco.ContadorDeTarefas].id = Banco.ContadorDeTarefas;
+    printf("Tarefa Criada com SUCESSO o  id e %i:\n", Banco.Tarefas[Banco.ContadorDeTarefas].id);
+    Banco.ContadorDeTarefas++;
+    VoltarPagAnterior();
+}
+EditarTarefa() {
+    int LocalizaEdit;
+    printf("-------------------- Editar -------------------\n");
+    printf("Digite o id do card a ser alterado\n");
+    
+    scanf_s("%d", &LocalizaEdit);
+    
+    while (getchar() != '\n');
+
+    for (int i = 0; i < Banco.ContadorDeTarefas; i++) {
+        if (LocalizaEdit == Banco.Tarefas[i].id) {
+            printf("Digite o titulo que voce deseja editar:\n");
+          
+            fgets(Banco.Tarefas[i].Titulo, sizeof(Banco.Tarefas[i].Descricao), stdin);
+
+            printf("Digite a descricao que voce deseja editar:\n");
+          
+            fgets(Banco.Tarefas[i].Descricao, sizeof(Banco.Tarefas[i].Descricao), stdin);
+     
+        }
+    }
+    VoltarPagAnterior();
+
+}
+Excluir() {
+
+    printf("--------------------Excluir -------------------\n");
+    //Vou achar se o id existe e isolar o indice
+    // a ideia e criar um array e colocar os que não vão ser excluidos la e deixar o que vai ser excluido de fora 
+    // depois jogar desse array pro array global 
+    printf("Digite o ID desejado para excluir: ");
+    int ExcluirId;
+    scanf_s("%d", &ExcluirId);  // Usando scanf ao invés de scanf_s
+
+    int i, j = 0;
+    int tarefaEncontrada = 0;
+
+    // Percorrendo as tarefas e excluindo a tarefa com o ID correspondente
+    for (i = 0; i < Banco.ContadorDeTarefas; i++) {
+        if (Banco.Tarefas[i].id != ExcluirId) {
+            // Copiar as tarefas restantes para o array sem excluir
+            Banco.Tarefas[j++] = Banco.Tarefas[i];
+        }
+        else {
+            tarefaEncontrada = 1;  // Marca que a tarefa foi encontrada e excluída
+        }
+    }
+
+    // Atualizando o contador de tarefas após a exclusão
+    if (tarefaEncontrada) {
+        Banco.ContadorDeTarefas = j;  // Ajusta o contador de tarefas
+        printf("Tarefa com ID %d foi excluída com sucesso!\n", ExcluirId);
+    }
+    else {
+        printf("Tarefa com ID %d não encontrada.\n", ExcluirId);
+    }
+    VoltarPagAnterior();
+  
+}
+VisualizarTodos() {
+    // visualizar tem q mostrar todos que estão criado
+    //receber um card por card de cada indice e imprimir 
+
+    printf("--------------------Vsualizar todos -------------------\n");
+    for (int i = 0; i < Banco.ContadorDeTarefas; i++) {
+        printf("Id %i\n", Banco.Tarefas[i].id);
+        printf("Titulo %s\n", Banco.Tarefas[i].Titulo);
+        printf("Descrcao %s\n", Banco.Tarefas[i].Descricao);
+    }
+    VoltarPagAnterior();
+}
+VisualizarporID() {
+    int LocalizaId;
+    printf("--------------------Vsualizar por ID -------------------\n");
+
+    printf("Digite o ID desejado\n");
+    scanf_s("%d", &LocalizaId);
+
+    if (LocalizaId == Banco.Tarefas[LocalizaId].id) {
+        printf("Id %i\n", Banco.Tarefas[LocalizaId].id);
+        printf("Titulo %s\n", Banco.Tarefas[LocalizaId].Titulo);
+        printf("Descrcao %s\n", Banco.Tarefas[LocalizaId].Descricao);
+    }
+    else
+    {
+        printf("Esse id não existe!");
+    }
+    VoltarPagAnterior();
+
+}
+VisualizarporDescricao() {
+    char FiltarDescricao[10];
+    printf("--------------------Vsualizar por Descrção -------------------\n");
+    printf("Digite a descricao que voce deseja filtrar\n");
+
+    fgets(FiltarDescricao, sizeof(FiltarDescricao), stdin);
+   
+    for (int i = 0; i < Banco.ContadorDeTarefas; i++) {
+
+        strstr(Banco.Tarefas[i].Descricao, FiltarDescricao);
+
+        printf("Id %i\n", Banco.Tarefas[i].id);
+        printf("Titulo %s\n", Banco.Tarefas[i].Titulo);
+        printf("Descrcao %s\n", Banco.Tarefas[i].Descricao);
+        return 0;
+    }
+    VoltarPagAnterior();
 }

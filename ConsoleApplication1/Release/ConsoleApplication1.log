@@ -1,0 +1,14 @@
+﻿  Function.c
+C:\Users\Alek\Documents\projeto em C\projeto_em_C\ConsoleApplication1\Function.c(45,9): warning C4013: 'CriarTarefa' indefinido; assumindo extern retornando int
+C:\Users\Alek\Documents\projeto em C\projeto_em_C\ConsoleApplication1\Function.c(50,9): warning C4013: 'EditarTarefa' indefinido; assumindo extern retornando int
+C:\Users\Alek\Documents\projeto em C\projeto_em_C\ConsoleApplication1\Function.c(55,9): warning C4013: 'Excluir' indefinido; assumindo extern retornando int
+C:\Users\Alek\Documents\projeto em C\projeto_em_C\ConsoleApplication1\Function.c(58,9): warning C4013: 'VisualizarTodos' indefinido; assumindo extern retornando int
+C:\Users\Alek\Documents\projeto em C\projeto_em_C\ConsoleApplication1\Function.c(63,9): warning C4013: 'VisualizarporID' indefinido; assumindo extern retornando int
+C:\Users\Alek\Documents\projeto em C\projeto_em_C\ConsoleApplication1\Function.c(68,9): warning C4013: 'VisualizarporDescricao' indefinido; assumindo extern retornando int
+  Gerando código
+C:\Users\Alek\Documents\projeto em C\projeto_em_C\ConsoleApplication1\Function.c(118): warning C4716: 'EditarTarefa': deve retornar um valor
+  3 of 15 functions (20.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finalizada a geração de código
+  ConsoleApplication1.vcxproj -> C:\Users\Alek\Documents\projeto em C\projeto_em_C\Release\ConsoleApplication1.exe
